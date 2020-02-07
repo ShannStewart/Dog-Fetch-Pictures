@@ -1,5 +1,6 @@
 function readyFunctions(){
     console.log("readyFuntions ran")
+    let dogNumber = 1;
     getNumber();
 }
 
@@ -7,18 +8,45 @@ function getNumber(){
     console.log("getNumber ran")
     $('.getDogs').on('click', '.puppyButton', function(event){
         event.preventDefault();
+        $('.dogDisplay').empty();
+        dogNumber = $('.puppyNumber').val();
+        console.log("dogNumber is: " + dogNumber);
+
         arrayAPI();
     })
 }
 
-//function to read number
-//$(.getDogs).on('click', 'input', function(event){}
-//get rid of current pictures
-//call API function
-
 function arrayAPI(){
     console.log("arrayAPI ran");
 
+    let dogPool = [];
+    for (i=0; i<dogNumber; i++){
+        dogPool.push(i);
+    }
+
+    $('.dogDisplay').append(
+        "<div class='dogTable'></div>"
+    )
+
+    let rowNumber = 0;
+    const rowLimit = 5; 
+
+    for (i=0; i<dogPool.length; i++){
+            if (i%5 == 0){
+            $('.dogTable').append(
+                "<div class='dogLine dogRow" + rowNumber + "'></div>"
+            );
+            console.log("<div class='dogLine dogRow" + rowNumber + "'></div>");
+                
+                rowName = ".dogRow" + rowNumber;
+                rowNumber++;
+            }
+            console.log("row: " + rowName);
+            $(rowName).append(
+                "<p>"+ i + "</p>"
+            );
+        }
+    
 
     readyFunctions();
 }

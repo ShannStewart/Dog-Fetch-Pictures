@@ -1,0 +1,4 @@
+.dogLine{
+ display: flex;
+ flex-direction: row;
+}
