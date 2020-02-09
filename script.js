@@ -6,7 +6,10 @@ function readyFunctions(){
 
 async function getNumber(){
     console.log("getNumber ran")
-    $('.getDogs').on('click', '.puppyButton', function(event){
+
+    await $('.getDogs').off('click');
+
+    await $('.getDogs').on('click', '.puppyButton', function(event){
         event.preventDefault();
     $('.dogDisplay').empty();
         console.log("Display emptied");
@@ -14,7 +17,7 @@ async function getNumber(){
         console.log("dogNumber is: " + dogNumber);
 
         arrayAPI();
-    })
+    });
 }
 
 async function arrayAPI(){
@@ -36,7 +39,7 @@ async function arrayAPI(){
     );
 
     let rowNumber = 0;
-    const rowLimit = 5; 
+
 
     for (i=0; i<dogPool.length; i++){
             if (i%5 == 0){
@@ -48,6 +51,10 @@ async function arrayAPI(){
                 rowName = ".dogRow" + rowNumber;
                 rowNumber++;
             }
+
+            dogImage = getDogImage(dogPool[i].message);
+            console.log("dog image: " + dogImage);
+
             $(rowName).append(
                 "<p>"+ i + "</p>"
             );
@@ -55,6 +62,12 @@ async function arrayAPI(){
         
 
     readyFunctions();
+}
+
+function getDogImage(dogMessage){
+    let newDogMessage = "<img src=" + dogMessage + "class='results-img'>";
+    console.log("dog message :" + newDogMessage);
+    return newDogMessage;
 }
 
 $(readyFunctions);
