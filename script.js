@@ -4,11 +4,12 @@ function readyFunctions(){
     getNumber();
 }
 
-function getNumber(){
+async function getNumber(){
     console.log("getNumber ran")
     $('.getDogs').on('click', '.puppyButton', function(event){
         event.preventDefault();
-        $('.dogDisplay').empty();
+    $('.dogDisplay').empty();
+        console.log("Display emptied");
         dogNumber = $('.puppyNumber').val();
         console.log("dogNumber is: " + dogNumber);
 
@@ -16,50 +17,44 @@ function getNumber(){
     })
 }
 
-function arrayAPI(){
+async function arrayAPI(){
     console.log("arrayAPI ran");
 
     let dogPool = [];
     for (i=0; i<dogNumber; i++){
-        dogPool.push(i);
+        await fetch('https://dog.ceo/api/breeds/image/random')
+        .then(response => response.json())
+        .then(responseJSON => dogPool.push(responseJSON))
+        .catch(error => alert('error! danger!'));
     }
+
+    console.log(dogPool);
+    console.log("length of dogpool: " + dogPool.length);
 
     $('.dogDisplay').append(
         "<div class='dogTable'></div>"
-    )
+    );
 
     let rowNumber = 0;
     const rowLimit = 5; 
 
     for (i=0; i<dogPool.length; i++){
             if (i%5 == 0){
+                console.log("making row " + rowNumber);
             $('.dogTable').append(
                 "<div class='dogLine dogRow" + rowNumber + "'></div>"
             );
-            console.log("<div class='dogLine dogRow" + rowNumber + "'></div>");
                 
                 rowName = ".dogRow" + rowNumber;
                 rowNumber++;
             }
-            console.log("row: " + rowName);
             $(rowName).append(
                 "<p>"+ i + "</p>"
             );
         }
-    
+        
 
     readyFunctions();
 }
-
-//function to call API
-//fetch('https://dog.ceo/api/breeds/image/random')
-//add API result to an array
-//loop until X where x is read number
-//call display function
-
-//function to display pictures
-//add section $(dogDisplay).append
-//`<img src="${responseJson.message}" class="results-img">`
-//loop until X, where X is array length 
 
 $(readyFunctions);
