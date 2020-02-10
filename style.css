@@ -3,7 +3,11 @@
  flex-direction: row;
 }
 
-.dogline img{
-    height: 25px;
+.dogPic{
+    height: 150px;
     width: auto;
+}
+
+.dogPic:hover{
+    transform: scale(2);
 }

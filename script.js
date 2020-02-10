@@ -56,7 +56,7 @@ async function arrayAPI(){
             console.log("dog image: " + dogImage);
 
             $(rowName).append(
-                "<p>"+ i + "</p>"
+                dogImage
             );
         }
         
@@ -65,8 +65,8 @@ async function arrayAPI(){
 }
 
 function getDogImage(dogMessage){
-    let newDogMessage = "<img src=" + dogMessage + "class='results-img'>";
-    console.log("dog message :" + newDogMessage);
+    let newDogMessage = "<img src='" + dogMessage + "' class='dogPic'>";
+    console.log("dog message: " + newDogMessage);
     return newDogMessage;
 }
 
